@@ -11,18 +11,12 @@ jobs:
     - uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Set AZ Account
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.0.72
-        inlineScript: |  
-            az account set --subscription "ead81f63-964b-4a53-942e-7a3448c0ff58"
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
         azcliversion: 2.0.72
         inlineScript: |
-            az storage blob upload-batch --account-name staysydstaticweb01 --auth-mode key -d '$web' -s .
+            az storage blob upload-batch --account-name staysydstaticweb01 --auth-mode key -d '$web' -s . --subscription "ead81f63-964b-4a53-942e-7a3448c0ff58"
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
