@@ -16,7 +16,7 @@ jobs:
       with:
         azcliversion: 2.0.72
         inlineScript: |
-            az storage blob upload-batch --account-name staysydstaticweb01 --auth-mode key -d '$web' -s . --subscription "ead81f63-964b-4a53-942e-7a3448c0ff58"
+            az storage blob upload-batch --account-name staysydstaticweb01 --subscription "ead81f63-964b-4a53-942e-7a3448c0ff58" --auth-mode key -d '$web' -s .
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
