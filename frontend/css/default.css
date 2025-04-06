@@ -314,7 +314,7 @@ ol ol, ol ul { margin: 6px 0 6px 30px; }
 ul ul li, ul ol li,
 ol ol li, ol ul li { margin-bottom: 6px; }
 li { line-height: 18px; margin-bottom: 12px; display:flex; }
-li:before {content: "•"; color: #333; margin-right: 0.5em; font-size: 1.2em; line-height: 1.2;}
+.bullet li:before {content: "•"; color: #333; margin-right: 0.5em; font-size: 1.2em; line-height: 1.2;}
 ul.large li { }
 li p { }
 
