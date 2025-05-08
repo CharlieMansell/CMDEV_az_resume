@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
 });
 
-const apiGateway = 'api here'
+const apiGateway = 'http://localhost:7071/api/httpTrigger'
 const getVisitCount = () => {
     let count = 0;
 
