@@ -6,7 +6,7 @@
 			"label": "npm install (functions)",
 			"command": "npm install",
 			"options": {
-				"cwd": "${workspaceFolder}/backend\\azfunction"
+				"cwd": "${workspaceFolder}/backend\\api"
 			}
 		},
 		{
@@ -15,7 +15,7 @@
 			"command": "npm prune --production",
 			"problemMatcher": [],
 			"options": {
-				"cwd": "${workspaceFolder}/backend\\azfunction"
+				"cwd": "${workspaceFolder}/backend\\api"
 			}
 		},
 		{
@@ -29,7 +29,7 @@
 			"type": "process",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/backend\\api"
 			}
 		},
 		{
@@ -48,7 +48,7 @@
 			},
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/backend/api"
 			}
 		},
 		{
@@ -64,31 +64,31 @@
 			"type": "process",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}backend/api"
 			}
 		},
 		{
 			"label": "publish (functions)",
-			"command": "dotnet",
-			"args": [
-				"publish",
-				"--configuration",
-				"Release",
-				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary"
-			],
 			"type": "process",
-			"dependsOn": "clean release (functions)",
-			"problemMatcher": "$msCompile",
+			"command": "dotnet",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
-			}
-		},
+				"cwd": "${workspaceFolder}/backend/api"
+			},
+			"args": [
+			  "publish",
+			  "--configuration",
+			  "Release",
+			  "/property:GenerateFullPaths=true",
+			  "/consoleloggerparameters:NoSummary",
+			  "-o", "${workspaceFolder}/publish"
+			],
+			"problemMatcher": "$msCompile"
+		  },
 		{
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/api/bin/Debug/net6.0"
+				"cwd": "${workspaceFolder}backend/api/bin/Debug/net6.0"
 			},
 			"command": "host start",
 			"isBackground": true,

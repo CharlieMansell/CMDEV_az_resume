@@ -2,10 +2,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
 });
 
-const apiGateway = 'http://localhost:7071/api/GetResumeCount';
+const functionApiUrl = 'https://cmdevgetresumecount.azurewebsites.net/api/GetResumeCount?code=tyh9eq-6GCoC3BMWr9lElSD-cvMR8mVsY45W2y8zjhZ8AzFuT8M0OQ==';
+const localFunctionApi = 'http://localhost:7071/api/GetResumeCount';
 
 const getVisitCount = () => {
-    fetch(apiGateway, {
+    fetch(functionApiUrl, {
         mode: 'cors',  // was `node: 'cors'`, which is a typo
     })
     .then(response => response.json())
