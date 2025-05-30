@@ -2,17 +2,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
 });
 
-const apiGateway = 'http://localhost:7071/api/httpTrigger'
-const getVisitCount = () => {
-    let count = 0;
+const apiGateway = 'http://localhost:7071/api/GetResumeCount';
 
+const getVisitCount = () => {
     fetch(apiGateway, {
-        node: 'cors',
-    }).then(response => {
-        return response.json()
-    }).then(res => {
-        const count = res;
-        document.getElementById('counter').innerText = count;
+        mode: 'cors',  // was `node: 'cors'`, which is a typo
+    })
+    .then(response => response.json())
+    .then(res => {
+        document.getElementById('counter').innerText = res.count;
+    })
+    .catch(error => {
+        console.error('Error fetching visit count:', error);
+        document.getElementById('counter').innerText = 'N/A';
     });
-    return count;
 }
