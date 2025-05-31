@@ -38,4 +38,4 @@ Thumbs.db
 
 # Ignore Local Azure Func Files #
 ####################################
-local*
+local.settings.json
