@@ -16,7 +16,7 @@ namespace Company.Function
     {
         [FunctionName("GetResumeCount")]
         public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(databaseName:"cmdevcosdb", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey= "1")] Counter counter,
             [CosmosDB(databaseName:"cmdevcosdb", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey= "1")] out Counter updatedCounter,
             ILogger log)
