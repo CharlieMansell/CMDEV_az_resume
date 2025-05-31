@@ -2,12 +2,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
 });
 
-const functionApiUrl = 'https://cmdevgetresumecount.azurewebsites.net/api/GetResumeCount?code=tyh9eq-6GCoC3BMWr9lElSD-cvMR8mVsY45W2y8zjhZ8AzFuT8M0OQ==';
+const apiGateway = 'https://cmdevgetresumecount.azurewebsites.net/api/GetResumeCount?code=tyh9eq-6GCoC3BMWr9lElSD-cvMR8mVsY45W2y8zjhZ8AzFuT8M0OQ==';
 const localFunctionApi = 'http://localhost:7071/api/GetResumeCount';
 
 const getVisitCount = () => {
-    fetch(functionApiUrl, {
-        mode: 'cors',  // was `node: 'cors'`, which is a typo
+    fetch(apiGateway, {
+        mode: 'cors',  
     })
     .then(response => response.json())
     .then(res => {
