@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_CMDevGetResumeCount_name": {
+            "value": null
+        },
+        "profiles_my_cdn_profile_webdev_name": {
+            "value": null
+        },
+        "databaseAccounts_azcosmoscrc01_name": {
+            "value": null
+        },
+        "storageAccounts_staysydstaticweb01_name": {
+            "value": null
+        },
+        "storageAccounts_cmdevgetresumecount_name": {
+            "value": null
+        },
+        "serverfarms_ASP_CMDevGetResumeCount_2707_name": {
+            "value": null
+        }
+    }
+}
