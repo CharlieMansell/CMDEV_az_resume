@@ -1,50 +1,14 @@
 # Azure Cloud Resume
 
-Simple overview of use/purpose.
+This repository holds the code for my attempt at the Azure Cloud Resume Challenge.
+
+The Cloud Resume Challenge is a hands-on, end-to-end cloud engineering project designed to demonstrate your practical cloud skills by building and deploying a resume website using real cloud infrastructure. It was created by Forrest Brazeal, a cloud educator, to help aspiring and current cloud professionals showcase their skills beyond certifications.
+
+[Cloud Resume Challenge](https://cloudresumechallenge.dev/)
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
 
-## Getting Started
-
-### Dependencies
-
-* Powershell 5.1
-
-#### PowerShell Modules
-
-* ExchangeOnlineManagement (version 3.7.1)
-* Microsoft.Graph.Authentication (version 2.26.1)
-* Microsoft.Graph.Users (version 2.26.1)
-* Microsoft.Graph.Identity.DirectoryManagement (version 2.26.1)
-* PowerShellGet (version 2.2.5)
-
-These modules must be installed as an administrator, and can be done with the below command. 
-
-```
-Install-Module -Name <ModuleName> -Scope AllUsers -Force
-```
-
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
 
 ## Deployment
 
