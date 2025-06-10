@@ -58,7 +58,7 @@
             <h1 class="responsive-headline">The Cloud Resume Challenge - Azure</h1>
             <p>The Cloud Resume Challenge is a hands-on, end-to-end cloud engineering project designed to demonstrate your practical cloud skills by building and deploying a resume website using real cloud infrastructure. It was created by Forrest Brazeal, a cloud educator, to help aspiring and current cloud professionals showcase their skills beyond certifications.
                <br></br>
-                  If you would like to take on this challenge yourself, you can read more about it <span><a href="https://cloudresumechallenge.dev/docs/the-challenge/azure/">here</a></span></p>
+                  If you would like to take on this challenge yourself, you can read more about it <span><a href="https://cloudresumechallenge.dev/docs/the-challenge/azure/" target="_blank">here</a></span></p>
          </div>
       </div>
 
@@ -82,7 +82,7 @@
             <div class="row item">
                <div class="twelve columns">
                   <p class >I had already completed various Microsoft Certifications, including the AZ-900. This was as simple as building out the HTML to state this on the site, that I had completed this certification<br></br>
-                  I also chose to provide a link to the verifiable link that is provided via Microsoft Learn. 
+                  I also chose to provide a verifiable link to the certificates, so they can be verified. 
                   </p>
                </div>
             </div> <!-- item end -->
@@ -95,7 +95,9 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>To be truthfully honest, I did not feel that further developing my </p>
+                  <p>To be truthfully honest, I did not feel that further developing my rusty HTML skillset, by building out the bare bones of the site myself. I leveraged a <a href="https://www.styleshout.com/free-templates/ceevee/">Template by CeeVee</a>, to speed up the process, so I could focus my attention on the more exciting stuff - like Azure! 
+                  <br></br>
+                  It's worth noting that my rusty skillset allowed me to modify the template, and make the site feel and look like mine. I even went the extra mile here, and decided to implement an additional page for my very own blog, so I could post this : ) </p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -107,7 +109,9 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>This was very much the same story as the HTML...I personally feel like this is a waste of time, when there are toolsets that can be leveraged to increase efficiency.
+                     <br></br>
+                  I did again modify these templates to get the design I wanted, but maybe one day when I have an unlimited amount of time, I will come and revisit and try my hand at building the site in CSS from scratch. </p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -119,35 +123,55 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Before I got started with anything, I decided to configure a budget on my Azure Subscription - that would notify me if my cloud spend cost more than AUD$10 a month, as I wanted this solution to account for minimal cloud spend, and not be shocked by a crazy Azure invoice, if I left some of my other projects running by accident.
+                     <br></br>
+                     If you are new to the Azure world, I would recommend you do the same, so you don't end up like this <a href="https://www.reddit.com/r/AZURE/comments/1fdci4v/accidentally_ran_up_a_charge_of_1k_when_learning/" target="_blank">person</a>
+                     <br></br>
+                     So the details provided by The Cloud Resume Challenge, were pretty on the nose here. They stated that Azure Storage should be used, so I deployed an Azure Storage Account, and got to the configuration.
+                     <br></br>
+                     I knew from prior experience within Azure, that the blob service offers a feature called <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website" target="_blank">Static Website</a>. Once enabled, this created a $web blob container - that will be used to hold the flat files for the website hosting. I specified my index and error page HTML documents and clicked save to ensure this was enabled.  
+                     <br></br>
+                     I was then able to browse to the primary endpoint, provided by the Static Web enabled Storage Account - and voila, I could see my site on the internet!! :D 
+                  </p>
+                  <img src="./images/AzureStorage.png">
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
       </div> <!-- End 4. Static Website -->
       <div class="row work">
          <div class="three columns header-col">
-            <h1><span>5. HTTPS</span></h1>
+            <h1><span>5. HTTPS & 6. DNS</span></h1>
          </div>
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Well, I could argue that it was already using HTTPS, as the Static Web enabled Storage Account already had HTTPS support, via the primary endpoint. However, the next step specified I use a custom domain name for my static site. so the primary endpoint on the Storage Account was no longer going to cut it.
+                  <br></br>
+                  The challenge pointed me toward using an Azure CDN / Front Door & Azure DNS. I had already registered cmdevelop.com with another domain registar and paid for the next few years, so I chose to not use Azure DNS to keep costs down. I had some very limited experience with CDN's or <a href="https://www.cloudflare.com/learning/cdn/what-is-a-cdn/"> content delivery networks</a>, and understood the fundamentals so I delved into understanding the difference between Azure Front Door and the classic CDN standard offering 
+                  <br></br>
+                  The main difference between these two services, is that Azure Front Door is more optimized toward Dynamic Delivery (ie, Applications or Services that serve content that frequently changes, or is personalized based on user interactions, or other factors), where as the CDN offering is optimized more towards static site delivery. These services both supported custom domains over HTTPS and looked to be fairly similar for the purposes that I would require the services for. I then found that the CDN was a much cheaper option to host on Azure, so I picked this service and deployed it.
+                  <br></br>
+                  I waited for my new CDN to deploy, and then found I needed to deploy a CDN endpoint, so I could map this back to the origin, so I created this specifying a unique name, set my origin type to Storage static website, as this made the most sense. This then allowed me to select my primary endpoint from my static web storage account, as the Origin hostname. I then chose to leave everything else default, as it was prefilled. 
+               </p>
+               <img src="./images/CDNEndpoint.png">
+               <p>I could now access my website directly, using HTTPS & the CDN endpoint. The CDN was using a cached copy of static site, to display the content. I verified this by deleting the index.html file within the $web container, and seeing if this modified the live site, that was accessible via the CDN endpoint. 
+                  <br></br>
+                  As expected, this was not updated, but I could see the update directly via the primary endpoint on the static web enabled storage account. This displayed the 404 page, as this did not hold a cached copy. I then purged my CDN via the Azure Portal, waited 5 minutes and the 404 page was now also visible via the CDN endpoint. This is a critical aspect of the functionality of a CDN, as it allowed the files on the site to be able to be deleted, and replaced without affecting the live copy - once I was ready for the changes to be visible to the live copy of the site - I purged the CDN cache, so it could now reference the most up to date data. 
+                  <br></br>
+                  Great! My CDN is working exactly as I was expecting it to, next I focused my attention on configuring my custom domain name. First of all, I needed to configure my DNS record, so I logged into my domain registrars portal and created a CNAME that pointed my website / domain hostname at my Endpoint hostname.
+               </p>
+                  <img src="./images/CNAME.png">
+               <p>
+                  I then returned to the Azure Portal, added the custom domain and clicked Save. I waited for this to apply, then clicked on the newly added domain name, and enabled the HTTPS feature. This took some time to complete, as it needs to complete validation and certificate deployment tasks. 
+                  <br></br>
+                  Once this had completed, I was able to access my site directly via my custom domain name, over HTTPS - https://resume.cmdevelop.com
+                  <br></br>
+                  There are some other cool features included in the CDN, that allows you to Geo-Filter & Block any requests originating from certain countries. I decided to leave most of my configuration default, but I challenge you to test these features out.
+               </p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
-      </div> <!-- End 5. HTTPS -->
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>6. DNS</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Technical Account Manager</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 6. DNS -->
+      </div> <!-- End 5. HTTPS & 6. DNS -->
       <div class="row work">
          <div class="three columns header-col">
             <h1><span>7. Javascript</span></h1>
@@ -155,7 +179,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -167,7 +191,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -179,7 +203,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -191,7 +215,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -203,7 +227,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -215,7 +239,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -227,7 +251,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -239,7 +263,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
@@ -251,7 +275,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Technical Account Manager</p>
+                  <p>Writing in Progress</p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
