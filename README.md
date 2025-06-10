@@ -6,9 +6,11 @@ The Cloud Resume Challenge is a hands-on, end-to-end cloud engineering project d
 
 [Cloud Resume Challenge](https://cloudresumechallenge.dev/)
 
-## Description
+## Architecture
 
 
+
+You can view my site [here](https://resume.cmdevelop.com)
 
 ## Deployment
 
@@ -25,17 +27,15 @@ az storage blob service-properties update --account-name staysydstaticweb01  --s
 * Verify CNAME & custom domain configuration on CDN Endpoint. 
 
 
-## Version History
+## My Experience
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+I found this project extremely helpful, to be able to further showcase my skillset on the Azure Platform, being able to have a practical experience beyond my certifications, that I can talk through in great detail, without breaching an NDA.... 
 
+I will be using this site moving forward to showcase other projects within the Microsoft 365 / Azure Space, as I have found I really enjoy writing blog posts - that can hopefully help others to understand concepts that I have learnt. 
+
+If you would like to read more about my experience, feel free to check out my blog post on the challenge [here](https://resume.cmdevelop.com/AzResumeBlogPost.html)
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* Nothing currently
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* The random reddit post that I stumbled across, where I first learnt of the challenge.
+* [Gwyn P @ Cloud Guru](https://www.pluralsight.com/resources/blog/cloud/cloudguruchallenge-your-resume-in-azure) - This helped me to conceptualize any concepts I was struggling with, particularly as C# was very new to me. 
