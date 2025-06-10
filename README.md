@@ -6,9 +6,6 @@ The Cloud Resume Challenge is a hands-on, end-to-end cloud engineering project d
 
 [Cloud Resume Challenge](https://cloudresumechallenge.dev/)
 
-## Architecture
-
-
 
 You can view my site [here](https://resume.cmdevelop.com)
 
