@@ -219,25 +219,6 @@ blockquote cite:before { content: "\2014 \0020"; }
 blockquote cite a,
 blockquote cite a:visited { color: #8B9798; border: none }
 
-#loader-wrapper {
-   position: fixed;
-   z-index: 9999;
-   top: 0;
-   left: 0;
-   width: 100vw;
-   height: 100vh;
-   background-color: #161415 no-repeat top center;
-   display: flex;
-   align-items: center;
-   justify-content: center;
- }
- 
- #loader-gif {
-   width: 100px;
-   height: 100px;
- }
- 
-
 /* ---------------------------------------------------------------------
 /*  Pull Quotes Markup
 /*
