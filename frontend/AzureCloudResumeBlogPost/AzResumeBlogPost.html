@@ -206,9 +206,9 @@
                      <br></br>
                      I looked towards Github actions, as I was already familiar with Azure DevOps Pipelines and .yml files. I found that Github actions were free and unlimited for public repositories, so this was perfect! 
                      <br><br>
-                     To automate the deployment process, I created a .yml file inside the <b>.github/workflows</b> directory of my repository. This allowed me to automatically push changes from my <b>frontend</b> folder directly to the <b>$web</b> container in my Azure Storage Account whenever I committed to the <b>main branch</b>.
+                     To automate the deployment process, I created a .yml file inside the .github/workflows directory of my repository. This allowed me to automatically push changes from my frontend folder directly to the $web container in my Azure Storage Account whenever I committed to the main branch.
                      <br></br>
-                     The logic here is simple: every time I push changes to the <b>main</b> branch that affect the <b>frontend/</b> folder, the workflow uploads the updated files to the Azure Blob Storage <b>$web</b> container using the <b>az storage blob upload-batch</b> command. Immediately afterward, I purge the Azure CDN endpoint to make sure the latest version of the site is served to users. Finally, I make sure to clean up the Azure session with <b>az logout</b>.
+                     The logic here is simple: every time I push changes to the main branch that affect the frontend/ folder, the workflow uploads the updated files to the Azure Blob Storage $web container using the az storage blob upload-batch command. Immediately afterward, I purge the Azure CDN endpoint to make sure the latest version of the site is served to users. Finally, I make sure to clean up the Azure session with az logout.
                      <br></br>
                      Initially, I tried to run the action or the workflow file and this failed as it could not login to Azure. After a bit of frustration (and a few failed workflow runs...), I decided to properly investigate the correct way to connect GitHub Actions to Azure. I eventually came across this <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure">Microsoft guide</a>, which turned out to be exactly what I needed. Following the steps in that article, I used the Azure CLI to create a new service principal and assign it appropriate access.
                   </p>
@@ -236,7 +236,7 @@
                   <li class="bullet">Call an API endpoint (which I’d build later),</li>
                   <li class="bullet">And then update a specific element on the page with the count it received.</li>
                   <br>
-                  To start, I added a <b>DOMContentLoaded</b> event listener so that my script would only run once the page’s HTML had fully rendered. Then, using the <b>fetch()</b> function, I planned to retrieve the count from the backend. Once I had that value, I’d target the counter element using <b>document.getElementById('counter')</b>, and replace its contents using <b>.innerText.</b>
+                  To start, I added a DOMContentLoaded event listener so that my script would only run once the page’s HTML had fully rendered. Then, using the fetch() function, I planned to retrieve the count from the backend. Once I had that value, I’d target the counter element using document.getElementById('counter'), and replace its contents using .innerText.
                   <br></br>
                   Even though I didn’t have a working backend yet, I structured the code to call a placeholder URL for now, and added basic error handling in case the fetch failed — which, at this point, it always would.
                   <br></br>
@@ -254,9 +254,9 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>With the front end logic in place and ready to consume an API, it was time to set up the backend storage — starting with the database. For this challenge, I chose to use <b>Azure Cosmos DB</b>. It's a globally distributed NoSQL database service from Microsoft, and while it might have been overkill for something as simple as a visitor counter, it was a great opportunity to get hands-on with it — and it integrates beautifully with Azure Functions through bindings. I used the learning tier to keep costs down.
+                  <p>With the front end logic in place and ready to consume an API, it was time to set up the backend storage — starting with the database. For this challenge, I chose to use Azure Cosmos DB. It's a globally distributed NoSQL database service from Microsoft, and while it might have been overkill for something as simple as a visitor counter, it was a great opportunity to get hands-on with it — and it integrates beautifully with Azure Functions through bindings. I used the learning tier to keep costs down.
                   <br><br>
-                  I created a <b>Cosmos DB account</b> in Azure within the same resource group, as the rest of my services, and then created;
+                  I created a Cosmos DB account in Azure within the same resource group, as the rest of my services, and then created;
                   <li class="bullet">A database called cmdevcosdb</li>
                   <li class="bullet">A container called Counter</li>
                   <li class="bullet">A simple document inside the container with: id: set to "1" & count: set to 0</li>
@@ -276,7 +276,7 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>With the frontend wired up and Cosmos DB ready, the next step was to build the API layer — a middleman that could safely read and write to the database without exposing sensitive credentials to the client. For this, I used <b>Azure Functions</b> — a serverless compute service that lets you run small bits of code without worrying about infrastructure. It was perfect for this use case: a lightweight, event-driven backend triggered by HTTP requests.
+                  <p>With the frontend wired up and Cosmos DB ready, the next step was to build the API layer — a middleman that could safely read and write to the database without exposing sensitive credentials to the client. For this, I used Azure Functions — a serverless compute service that lets you run small bits of code without worrying about infrastructure. It was perfect for this use case: a lightweight, event-driven backend triggered by HTTP requests.
                   <br></br>
                   I used the Azure Functions extension in Visual Studio Code to scaffold the project. After installing the extension, I hit F1, searched for Azure Functions: Create New Project, and followed the prompts. I chose .NET as the runtime (as I wanted to challenge myself with C#, rather than Python), selected HTTP trigger, and proceeded with the default options for the initial setup.
                   <br></br>
