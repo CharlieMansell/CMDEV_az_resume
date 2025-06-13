@@ -183,7 +183,9 @@
                      <br></br>
                      I was already pretty familar with git, and utilizing Github to store projects I am working on, so I initialized a new git repository on my machine and committed these changes to my repository, I also spent some time building out the framework of my ReadMe file. This is my first public repository, so I wanted to make sure this looked presentable and professional for anyone that stumbles across this.
                   </p>
+                  <div style="text-align: center;">
                      <img src="./images/git.png">
+                  </div>
                   <p>   
                      The challenge does state that I should not be manually updating either my back-end or front-end, and that they should automatically update when a change is made to the code. This will be addressed seperately within the CI/CD chapters of this blog post.
                      <br></br>
@@ -200,7 +202,24 @@
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Writing in Progress</p>
+                  <p>I was slowly making changes to my site, whilst I was researching and understanding how I could use Cosmos DB & an Azure Function to implement the visitor counter onto the site. I found it to be quite cumbersome, to upload my files to the $web container each time I made a change, that I wanted to make public on the site. Additional to this, I then had to purge the CDN endpoint. This meant logging into the portal each time - which I was not thrilled about...
+                     <br></br>
+                     I looked towards Github actions, as I was already familiar with Azure DevOps Pipelines and .yml files. I found that Github actions were free and unlimited for public repositories, so this was perfect! 
+                     <br><br>
+                     To automate the deployment process, I created a .yml file inside the <b>.github/workflows</b> directory of my repository. This allowed me to automatically push changes from my <b>frontend</b> folder directly to the <b>$web</b> container in my Azure Storage Account whenever I committed to the <b>main branch</b>.
+                     <br></br>
+                     The logic here is simple: every time I push changes to the <b>main</b> branch that affect the <b>frontend/</b> folder, the workflow uploads the updated files to the Azure Blob Storage <b>$web</b> container using the <b>az storage blob upload-batch</b> command. Immediately afterward, I purge the Azure CDN endpoint to make sure the latest version of the site is served to users. Finally, I make sure to clean up the Azure session with <b>az logout</b>.
+                     <br></br>
+                     Initially, I tried to run the action or the workflow file and this failed as it could not login to Azure. After a bit of frustration (and a few failed workflow runs...), I decided to properly investigate the correct way to connect GitHub Actions to Azure. I eventually came across this <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure">Microsoft guide</a>, which turned out to be exactly what I needed. Following the steps in that article, I used the Azure CLI to create a new service principal and assign it appropriate access.
+                  </p>
+                  <div style="text-align: center;">
+                     <img src="./images/actionfails.png">
+                  </div>
+                  <p>
+                     This returned a JSON blob with all the necessary authentication details in the format that the azure login expects. I took that entire output and added it as a new GitHub Secret called AZURE_CREDENTIALS under my repository settings.
+                     <br></br>
+                     After doing this, the login step in my workflow started working perfectly — and my site was automatically deploying with every commit. Success! Using this setup meant no more manual uploads or purging — just commit and push, and GitHub Actions takes care of the rest. It was a small change, but it made a massive difference to my workflow.
+                  </p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
