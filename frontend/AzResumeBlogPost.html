@@ -226,102 +226,193 @@
       </div> <!-- End 8. CI/CD (Front end) -->
       <div class="row work">
          <div class="three columns header-col">
-            <h1><span>7. Javascript</span></h1>
+            <h1><span>9. Javascript</span></h1>
          </div>
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 7. Javascript -->
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>8. Database</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 8. Database -->
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>9. API</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 9. API -->
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>10. Python</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 10. Python -->
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>11. Tests</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 11. Tests -->
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>12. IaC</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 12. Infrastructure as Code -->
-      
-      <div class="row work">
-         <div class="three columns header-col">
-            <h1><span>14. CI/CD Back End</span></h1>
-         </div>
-         <div class="nine columns main-col">
-            <div class="row item">
-               <div class="twelve columns">
-                  <p>Writing in Progress</p>
-               </div>
-            </div> <!-- item end -->
-         </div> <!-- main-col end -->
-      </div> <!-- End 14. CI/CD (Back end) -->
+                  <p>It was now time to start building out the JavaScript that would eventually power the dynamic visitor counter on my site. While I hadn’t yet created the Azure Function or Cosmos DB to store and retrieve the actual count, I knew what the shape of the integration would look like — and I wanted to get the frontend side ready first. JavaScript was fairly familiar to me at a fundamental level, especially after having built a few React projects over the past few months. I knew I’d need a script that would: 
+                  <li class="bullet">Wait until the page finishes loading</li>
+                  <li class="bullet">Call an API endpoint (which I’d build later),</li>
+                  <li class="bullet">And then update a specific element on the page with the count it received.</li>
+                  <br>
+                  To start, I added a <b>DOMContentLoaded</b> event listener so that my script would only run once the page’s HTML had fully rendered. Then, using the <b>fetch()</b> function, I planned to retrieve the count from the backend. Once I had that value, I’d target the counter element using <b>document.getElementById('counter')</b>, and replace its contents using <b>.innerText.</b>
+                  <br></br>
+                  Even though I didn’t have a working backend yet, I structured the code to call a placeholder URL for now, and added basic error handling in case the fetch failed — which, at this point, it always would.
+                  <br></br>
+                  This approach let me build and test the visual experience right away, so I’d be able to drop in the backend connection seamlessly once the API and database were up and running.
 
+               </p>
+               </div>
+            </div> <!-- item end -->
+         </div> <!-- main-col end -->
+      </div> <!-- End 9. Javascript -->
       <div class="row work">
          <div class="three columns header-col">
-            <h1><span>16. Blog post</span></h1>
+            <h1><span>10. Database</span></h1>
          </div>
          <div class="nine columns main-col">
             <div class="row item">
                <div class="twelve columns">
-                  <p>To complete this challenge, I needed to write a blog post that provided insights into my journey building out my professional resume on Azure Cloud. </p>
+                  <p>With the front end logic in place and ready to consume an API, it was time to set up the backend storage — starting with the database. For this challenge, I chose to use <b>Azure Cosmos DB</b>. It's a globally distributed NoSQL database service from Microsoft, and while it might have been overkill for something as simple as a visitor counter, it was a great opportunity to get hands-on with it — and it integrates beautifully with Azure Functions through bindings. I used the learning tier to keep costs down.
+                  <br><br>
+                  I created a <b>Cosmos DB account</b> in Azure within the same resource group, as the rest of my services, and then created;
+                  <li class="bullet">A database called cmdevcosdb</li>
+                  <li class="bullet">A container called Counter</li>
+                  <li class="bullet">A simple document inside the container with: id: set to "1" & count: set to 0</li>
+                  <br>
+                  At this point, I had my database structure in place and a connection string ready to go. I initially attempted to connect directly to the Cosmos DB using just the URI and connection string from my JavaScript — but quickly ran into authentication issues. As it turns out, Cosmos DB requires properly signed authorization headers for direct access, which makes it a poor candidate for client-side interaction.
+                  <br></br>
+                  This was actually a good thing — exposing the database directly to the browser would have been a major security risk. Instead, it confirmed what I already suspected: I needed a secure API layer between the frontend and the database. That’s where Azure Functions would come in.
+                  </p>
                </div>
             </div> <!-- item end -->
          </div> <!-- main-col end -->
-      </div> <!-- End 16. Blog post -->
+      </div> <!-- End 10. Database -->
+      <div class="row work">
+         <div class="three columns header-col">
+            <h1><span>11. API</span></h1>
+         </div>
+         <div class="nine columns main-col">
+            <div class="row item">
+               <div class="twelve columns">
+                  <p>With the frontend wired up and Cosmos DB ready, the next step was to build the API layer — a middleman that could safely read and write to the database without exposing sensitive credentials to the client. For this, I used <b>Azure Functions</b> — a serverless compute service that lets you run small bits of code without worrying about infrastructure. It was perfect for this use case: a lightweight, event-driven backend triggered by HTTP requests.
+                  <br></br>
+                  I used the Azure Functions extension in Visual Studio Code to scaffold the project. After installing the extension, I hit F1, searched for Azure Functions: Create New Project, and followed the prompts. I chose .NET as the runtime (as I wanted to challenge myself with C#, rather than Python), selected HTTP trigger, and proceeded with the default options for the initial setup.
+                  <br></br>
+                  C# was new territory for me — I’d seen it used in various enterprise projects but hadn’t yet written anything production-worthy myself. This challenge gave me the perfect excuse to dive in. I quickly learned that, thanks to Azure Functions’ support for bindings, I didn’t need to write a ton of boilerplate code to interact with Cosmos DB.
+                  <br></br>
+                  I created a simple model called Counter with two properties: id and count. Then, I wired up the function to use input and output bindings for Cosmos DB. These bindings allowed the Azure Function to:
+                  <li class="bullet">Automatically retrieve the document with id = "1" from the Counter container on invocation,</li>
+                  <li class="bullet">Let me modify its properties directly in C#,</li>
+                  <li class="bullet">And seamlessly write the updated version back to the database, without explicitly handling database connections or operations.</li>
+                  <br>
+                  To make this work, I needed the Cosmos DB connection string from the previous step. I added this to the local.settings.json file under the key AzureResumeConnectionString. This file is essential for running and testing the function locally, as it securely stores runtime configuration values without hardcoding them in the source code. When I deployed the function to Azure, I made sure to replicate the same key in the Application Settings of the Function App — keeping things consistent between environments.
+                  <br></br>
+                  The function itself was triggered by a simple HTTP GET request. When called, it would:
+                  <br></br>
+                  <li class="bullet">Retrieve the current count document from Cosmos DB.</li>
+                  <li class="bullet">Increment the count value.</li>
+                  <li class="bullet">Return the updated count in a JSON response.</li>
+                  <br>
+                  I found it incredibly powerful how the [CosmosDB] binding could handle both the input and the output just by defining them as parameters — it made the code clean and easy to follow. That said, understanding the syntax around bindings, the required attributes, and the naming conventions took a bit of trial and error.
+                  <br></br>
+                  Along the way, I learned:
+                  <br></br>
+                  <li class="bullet">How to structure function signatures with multiple bindings,</li>
+                  <li class="bullet">The importance of matching partition keys and IDs correctly,</li>
+                  <li class="bullet">And how valuable proper logging (ILogger) can be when debugging in a stateless, cloud-based environment.</li>
+                  <br>
+                  Once everything was wired up locally, I tested the function using the built-in func runtime, and set the local func API within my front-end Javascript code, and confirmed that it was correctly incrementing the value in the database and returning the updated count to the client. The added benefit of being able to run these locally, is that I did not incur a cost for running the function, so I could test this with a whole lot of trial and error!
+                  <br></br>
+                  Deploying the function to Azure via VS Code (using the Advanced deployment option) was seamless, and it allowed me to select the correct resource group and keep all of my services neatly together.
+                  <br></br>
+                  After deployment, I ran into one final issue — the frontend was failing to fetch the API, and browser dev tools pointed to CORS. I quickly updated the CORS settings in the Function App configuration to allow my frontend's domain (e.g. https://resume.cmdevelop.com) — and as soon as that was in place, everything clicked. The counter started updating live on page load, just as I’d planned.
+               </p>
+               </div>
+            </div> <!-- item end -->
+         </div> <!-- main-col end -->
+      </div> <!-- End 11. API -->
+      <div class="row work">
+         <div class="three columns header-col">
+            <h1><span>12. Tests</span></h1>
+         </div>
+         <div class="nine columns main-col">
+            <div class="row item">
+               <div class="twelve columns">
+                  <p>As I was working through the Function logic, I also wanted to build in a bit of automated testing — something that would validate the API behavior before I deployed it. Since I was planning to integrate this into a backend GitHub Actions workflow (more on that next), I knew these tests could act as a safeguard: the function wouldn’t deploy if the logic ever broke.
+                  <br></br>
+                  I wrote a basic unit test using xUnit. Its goal was simple: simulate a request to the Azure Function, and check that the visitor count was correctly incremented by one.
+                  <br></br>
+                  To do this, I created mock versions of the HttpRequest and ILogger objects using a factory pattern (TestFactory), and passed them into the function along with a dummy Counter object. The test then asserted that the count value was incremented as expected.
+                  <br></br>
+                  While it doesn’t hit a real database or run in a hosted environment, it does validate the core logic of the Function — which is exactly what I wanted. And by placing this in the test project (tests.csproj), I was able to run this test as part of my CI/CD pipeline before deploying anything.
+                  </p>
+                  <div style="text-align: center;">
+                     <img src="./images/tests.png">
+                  </div>
+               </div>
+            </div> <!-- item end -->
+         </div> <!-- main-col end -->
+      </div> <!-- End 12. Tests -->
+      <div class="row work">
+         <div class="three columns header-col">
+            <h1><span>13. CI/CD Back End</span></h1>
+         </div>
+         <div class="nine columns main-col">
+            <div class="row item">
+               <div class="twelve columns">
+                  <p>With the frontend GitHub Actions workflow already working smoothly, I wanted to bring the same automation to the backend. My goal was simple: every time I pushed a change to the backend/ folder on the main branch, I wanted GitHub to:
+                  <li class="bullet">Build the Azure Function project</li>
+                  <li class="bullet">Run the unit tests I had written,</li>
+                  <li class="bullet">And only deploy to Azure if those tests passed.</li>
+                  <br>
+                  This is exactly what my backend workflow does. Here’s the logic behind the GitHub Actions workflow I created:
+                  <br></br>
+                  <li class="bullet">It’s triggered by changes to anything under the backend/ path, on the main branch</li>
+                  <li class="bullet">It sets up a .NET 6 environment.</li>
+                  <li class="bullet">It builds the Function App from the api/ subfolder.</li>
+                  <li class="bullet">Then it runs the unit tests from the tests/ folder.</li>
+                  <li class="bullet">Finally — if the tests pass — it deploys the built function to Azure.</li>
+                  <br>
+                  This setup gave me confidence that any logic changes to the Function would be vetted automatically. The build step compiles the Function App in release mode, while the testing step runs the unit tests I had previously written to validate the core behavior — specifically ensuring the visitor count increments correctly.
+                  <br></br>
+                  By placing this check before deployment, I created a safety net: if any test fails, the deployment step is skipped entirely. This helps prevent pushing a broken version of the function to production — something I really valued as I was iterating quickly and learning on the fly.
+                  <br></br>
+                  Once the tests pass, the workflow publishes the output to Azure, using the Function App name and package path I defined in the environment variables. The workflow also logs into Azure using the credentials securely stored as a GitHub secret (the same credentials I defined for the front end), keeping everything streamlined and secure.
+                  <br></br>
+                  Integrating testing into the pipeline was a small but powerful step. It elevated my confidence in the changes I was making — and gave me a much deeper understanding of how CI/CD pipelines can enforce reliability through automation.
+                  </p>
+               </div>
+            </div> <!-- item end -->
+         </div> <!-- main-col end -->
+      </div> <!-- End 13. CI/CD (Back end) -->
+      <div class="row work">
+         <div class="three columns header-col">
+            <h1><span>14. IaC</span></h1>
+         </div>
+         <div class="nine columns main-col">
+            <div class="row item">
+               <div class="twelve columns">
+                  <p>To wrap up the challenge, I wanted to demonstrate some Infrastructure as Code — not through another GitHub Actions workflow, since I had already showcased automation extensively, but to show how powerful and approachable Azure Bicep can be for defining resources declaratively.
+                  <br></br>
+                  I started by logging into the Azure Portal and downloading the existing ARM templates for the resources I had built manually. From there, I decompiled the ARM templates into Bicep, giving me a readable and editable representation of my infrastructure.
+                  <br></br>
+                  The process was a bit trial and error at first. I’d make changes to the Bicep file, attempt to deploy it into a new resource group, and refine it until I could get a consistent and clean deployment. This iterative process really helped me understand the resource dependencies and how Bicep handles parameters, names, and linked services.
+                  <br></br>
+                  One intentional decision I made was to exclude the Azure Function from the Bicep deployment. Since I already had a solid CI/CD workflow in place for deploying function code via GitHub Actions, I didn’t want to overcomplicate the infrastructure layer. Instead, I manually created the Function App from VS Code, and once my Bicep file had finished provisioning the rest of the environment (like the storage account and Cosmos DB), I simply pushed updates to the frontend and backend through the respective pipelines.
+                  <br></br>
+                  This gave me the best of both worlds: repeatable infrastructure deployment with Bicep, and continuous, test-driven function deployment through CI/CD. It also helped me better appreciate how manual steps, IaC, and pipelines can all work together in a flexible DevOps workflow.
+                  <br></br>
+                  </p>
+               </div>
+            </div> <!-- item end -->
+         </div> <!-- main-col end -->
+      </div> <!-- End 14. Infrastructure as Code -->
+      <div class="row work">
+         <div class="three columns header-col">
+            <h1><span>15. Blog post</span></h1>
+         </div>
+         <div class="nine columns main-col">
+            <div class="row item">
+               <div class="twelve columns">
+                  <p>Completing the Cloud Resume Challenge was more than just ticking off technical tasks — it was a genuinely rewarding learning journey that brought together frontend development, backend APIs, cloud services, CI/CD automation, infrastructure as code, and now, writing about it all.
+                  <br></br>
+                  Throughout the challenge, I pushed myself to try new tools and approaches — like working with C# and Azure Functions, writing automated tests in xUnit, structuring my deployment pipelines, and getting hands-on with Bicep. Each step helped solidify my understanding of modern cloud-native development, and by the end, I had a much more complete view of how all these pieces can work together in a real-world project.
+                  <br></br>
+                  And of course, there was one final step to complete the challenge: writing a blog post. Instead of publishing it on a platform like Dev.to or Hashnode, I decided to build the blog directly into my own resume site — keeping the project fully self-contained and completely mine from end to end.
+                  <br></br>
+                  Surprisingly, writing this blog became one of the most enjoyable parts of the whole experience. It pushed me to slow down, reflect, and explain what I’d learned in a way that someone else could follow. What started as a requirement turned into something I’ve genuinely come to enjoy — and it’s definitely sparked my interest in writing more technical content in the future.
+                  <br></br>
+                  If you’d like to see the full source code for this project — including the frontend, backend, infrastructure templates, and GitHub Actions workflows — you can check it out in my public GitHub repository.
+                  <div style="text-align: center;">
+                     <a href="https://github.com/CharlieMansell/CMDEV_az_resume"><img src="./images/github.png"></a>
+                  </div>
+                  </p>
+               </div>
+            </div> <!-- item end -->
+         </div> <!-- main-col end -->
+      </div> <!-- End 15. Blog post -->
 
 
    </section> <!-- Resume Section End-->

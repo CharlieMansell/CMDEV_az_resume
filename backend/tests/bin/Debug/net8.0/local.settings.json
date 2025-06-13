@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "AzureResumeConnectionString":"AccountEndpoint=https://azcosmoscrc01.documents.azure.com:443/;AccountKey=8UoLJ34GVQedhefkV3VTnHfpv7ZlHLf1ME8xTucsWiQG8zKSmYvPF5VYGths4fAzse03Sj2Yk7csACDbmNcL7Q==;"
+    "AzureResumeConnectionString":"AccountEndpoint=https://azcosmoscrc01.documents.azure.com:443/;AccountKey=GJENCARI4o9orEmzqUaC3bOSushyTVenWy2C0VhvZL28JdGnYNEhLtCc9P1vC7jseCfx7F0n1VLQACDbP3H9dA==;"
   },
   "Host":
   {
